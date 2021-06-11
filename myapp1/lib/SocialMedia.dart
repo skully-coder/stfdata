@@ -308,11 +308,11 @@ class _SocialMediaState extends State<SocialMedia> {
                         //       ),
                         //     ),
                         //     onChanged: (value) {
-                        //       print(value);
+                        //       
                         //       setState(() {
                         //         temppostModel =
                         //             relevantResultsPosts(value, postModel);
-                        //         // print(tempuserModel);
+                        //         // 
                         //       });
                         //     },
                         //   ),
@@ -361,9 +361,9 @@ class _SocialMediaState extends State<SocialMedia> {
                         //         tempuserModel =
                         //             relevantResultsUsers(value, userModel);
                         //         for (UserModel t in tempuserModel) {
-                        //           print(t.firstName);
+                        //           
                         //         }
-                        //         print("\n");
+                        //         
                         //       });
                         //     },
                         //   ),
@@ -401,7 +401,7 @@ class _SocialMediaState extends State<SocialMedia> {
   }
 
   List<PostModel> relevantResultsPosts(searchTerm, List<PostModel> posts) {
-    print(searchTerm);
+    
     if (searchTerm.length < 1 || searchTerm == "") {
       return [];
     }

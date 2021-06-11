@@ -45,7 +45,7 @@ class _PostPageState extends State<PostPage> {
     post.ownerFName = d['owner']['firstName'];
     post.ownerLName = d['owner']['lastName'];
     post.publishDate = DateTime.parse(d['publishDate']);
-    // print(post.ownerFName);
+    // 
     setState(() {
       isUserLoaded = true;
     });

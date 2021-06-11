@@ -82,7 +82,7 @@ class _StockPageState extends State<StockPage> {
     // var queryParameters = {'apikey': 'utyqe54xqnb7v5gju7x1'};
     var url =
         "https://dummy-wireframe.iecsemanipal.com/stock/$stockId?apikey=utyqe54xqnb7v5gju7x1";
-    // print(url);
+    // 
     var uri = Uri.parse(url);
     // uri.replace(queryParameters: queryParameters);
 

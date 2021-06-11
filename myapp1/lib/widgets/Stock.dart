@@ -28,7 +28,7 @@ class _StockState extends State<Stock> {
     var response = await http.get(uri);
     var responseData = json.decode(response.body);
     var data = responseData['data'];
-    // print(data);
+    // 
     try {
       for (var d in data) {
         StockModel p = StockModel(
@@ -91,7 +91,7 @@ class _StockState extends State<Stock> {
           lastSplitDate: d["LastSplitDate"],
         );
         // p.display();
-        print(p);
+        
         stockModel.add(p);
       }
       setState(() {
@@ -171,7 +171,7 @@ class _StockState extends State<Stock> {
                           setState(() {
                             tempstockModel =
                                 relevantResultsStocks(value, stockModel);
-                            // print(tempuserModel);
+                            // 
                           });
                         },
                       ),
