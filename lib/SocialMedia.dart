@@ -1,13 +1,14 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:myapp1/models/PostModel.dart';
-import 'package:myapp1/models/UserModel.dart';
-import 'package:myapp1/widgets/Post.dart';
-import 'package:myapp1/widgets/User.dart';
+import 'models/PostModel.dart';
+import 'models/UserModel.dart';
+import 'widgets/PostPage.dart';
 // import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
+import 'widgets/UserPage.dart';
+import 'package:page_transition/page_transition.dart';
 
 class SocialMedia extends StatefulWidget {
   const SocialMedia({Key? key}) : super(key: key);
@@ -27,6 +28,8 @@ class _SocialMediaState extends State<SocialMedia> {
   List<UserModel> tempuserModel = [];
 
   List<PostModel> temppostModel = [];
+
+  String searchTerm = '';
 
   // var res = {
   //   "data": [
@@ -282,42 +285,93 @@ class _SocialMediaState extends State<SocialMedia> {
             ];
           },
           body: currentIndex == 0
-              ? isPostLoaded == true
+              ? isPostLoaded == true && mounted
                   ? Container(
                       child: ListView(
                       children: [
-                        // Padding(
-                        //   padding: const EdgeInsets.all(12.0),
-                        //   child: TextFormField(
-                        //     textCapitalization: TextCapitalization.words,
-                        //     style: TextStyle(
-                        //       fontSize: 14.0,
-                        //       color: Colors.white,
-                        //       fontWeight: FontWeight.w700,
-                        //     ),
-                        //     decoration: InputDecoration(
-                        //       hintText: 'Search',
-                        //       hintStyle: TextStyle(color: Colors.white),
-                        //       // fillColor: DataHolder.of(context).theme.networkDrawerBg,
-                        //       filled: true,
-                        //       border: OutlineInputBorder(
-                        //         borderRadius: BorderRadius.circular(10.0),
-                        //         borderSide: BorderSide(
-                        //           color: Colors.white,
-                        //         ),
-                        //       ),
-                        //     ),
-                        //     onChanged: (value) {
-                        //       
-                        //       setState(() {
-                        //         temppostModel =
-                        //             relevantResultsPosts(value, postModel);
-                        //         // 
-                        //       });
-                        //     },
-                        //   ),
-                        // ),
-                        ...temppostModel.map((e) => Post(post: e)),
+                        Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: TextFormField(
+                            textCapitalization: TextCapitalization.words,
+                            style: TextStyle(
+                              fontSize: 14.0,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                            ),
+                            decoration: InputDecoration(
+                              hintText: 'Search',
+                              hintStyle: TextStyle(color: Colors.white),
+                              // fillColor: DataHolder.of(context).theme.networkDrawerBg,
+                              filled: true,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            onChanged: (value) {
+                              setState(() {
+                                searchTerm = value;
+                                temppostModel =
+                                    relevantResultsPosts(value, postModel);
+                                // print(value + ": $temppostModel");
+                              });
+                            },
+                          ),
+                        ),
+                        ...temppostModel.map((post) => Container(
+                                child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: InkWell(
+                                onTap: () async {
+                                  await Navigator.push(
+                                      context,
+                                      PageTransition(
+                                        child: PostPage(
+                                          post: post,
+                                        ),
+                                        type: PageTransitionType.rightToLeft,
+                                        duration: Duration(milliseconds: 300),
+                                        reverseDuration:
+                                            Duration(milliseconds: 300),
+                                      ));
+                                },
+                                child: Card(
+                                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                                  elevation: 5,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Image.network(
+                                        post.image,
+                                        width: double.infinity,
+                                        height: 200,
+                                        fit: BoxFit.cover,
+                                        gaplessPlayback: false,
+                                      ),
+                                      ListTile(
+                                        title: Text(
+                                          post.text.toString().toLowerCase(),
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w800,
+                                            fontFamily: 'Poppins',
+                                          ),
+                                        ),
+                                        trailing: Icon(
+                                          Icons.arrow_forward_ios,
+                                          size: 20,
+                                        ),
+                                        tileColor: Color(0xFFF5F5F5),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ))),
                       ],
                     ))
                   : Row(
@@ -335,42 +389,93 @@ class _SocialMediaState extends State<SocialMedia> {
                   ? Container(
                       child: ListView(
                       children: [
-                        // Padding(
-                        //   padding: const EdgeInsets.all(12.0),
-                        //   child: TextFormField(
-                        //     textCapitalization: TextCapitalization.words,
-                        //     style: TextStyle(
-                        //       fontSize: 14.0,
-                        //       color: Colors.white,
-                        //       fontWeight: FontWeight.w700,
-                        //     ),
-                        //     decoration: InputDecoration(
-                        //       hintText: 'Search',
-                        //       hintStyle: TextStyle(color: Colors.white),
-                        //       // fillColor: DataHolder.of(context).theme.networkDrawerBg,
-                        //       filled: true,
-                        //       border: OutlineInputBorder(
-                        //         borderRadius: BorderRadius.circular(10.0),
-                        //         borderSide: BorderSide(
-                        //           color: Colors.white,
-                        //         ),
-                        //       ),
-                        //     ),
-                        //     onChanged: (value) {
-                        //       setState(() {
-                        //         tempuserModel =
-                        //             relevantResultsUsers(value, userModel);
-                        //         for (UserModel t in tempuserModel) {
-                        //           
-                        //         }
-                        //         
-                        //       });
-                        //     },
-                        //   ),
-                        // ),
+                        Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: TextFormField(
+                            textCapitalization: TextCapitalization.words,
+                            style: TextStyle(
+                              fontSize: 14.0,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                            ),
+                            decoration: InputDecoration(
+                              hintText: 'Search',
+                              hintStyle: TextStyle(color: Colors.white),
+                              // fillColor: DataHolder.of(context).theme.networkDrawerBg,
+                              filled: true,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            onChanged: (value) {
+                              setState(() {
+                                tempuserModel =
+                                    relevantResultsUsers(value, userModel);
+                              });
+                            },
+                          ),
+                        ),
                         Column(
                           children: [
-                            ...userModel.map((e) => User(user: e)),
+                            ...tempuserModel.map((user) => Container(
+                                    child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: InkWell(
+                                    onTap: () async {
+                                      await Navigator.push(
+                                          context,
+                                          PageTransition(
+                                            child: UserPage(
+                                              user: user,
+                                            ),
+                                            type:
+                                                PageTransitionType.rightToLeft,
+                                            duration:
+                                                Duration(milliseconds: 300),
+                                            reverseDuration:
+                                                Duration(milliseconds: 300),
+                                          ));
+                                    },
+                                    child: Card(
+                                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                                      elevation: 5,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                      ),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Image.network(
+                                            user.picture,
+                                            width: double.infinity,
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.40,
+                                            fit: BoxFit.cover,
+                                          ),
+                                          ListTile(
+                                            title: Text(
+                                              '${user.firstName} ${user.lastName}',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            trailing: Icon(
+                                              Icons.arrow_forward_ios,
+                                              size: 20,
+                                            ),
+                                            tileColor: Color(0xFFF5F5F5),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ))),
                           ],
                         ),
                       ],
@@ -390,8 +495,8 @@ class _SocialMediaState extends State<SocialMedia> {
   }
 
   List<UserModel> relevantResultsUsers(searchTerm, List<UserModel> users) {
-    if (searchTerm.length < 1) {
-      return [];
+    if (searchTerm.length < 0) {
+      return users;
     }
     return users
         .where((item) =>
@@ -401,9 +506,8 @@ class _SocialMediaState extends State<SocialMedia> {
   }
 
   List<PostModel> relevantResultsPosts(searchTerm, List<PostModel> posts) {
-    
-    if (searchTerm.length < 1 || searchTerm == "") {
-      return [];
+    if (searchTerm.length < 0) {
+      return posts;
     }
 
     return posts

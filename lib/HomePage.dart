@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp1/SocialMedia.dart';
-import 'package:myapp1/widgets/Institution.dart';
+import 'SocialMedia.dart';
+import 'widgets/Institution.dart';
 import 'package:page_transition/page_transition.dart';
 
 import 'widgets/Stock.dart';
@@ -28,6 +28,9 @@ class _HomePageState extends State<HomePage> {
           headerSliverBuilder: (BuildContext context, bool hasScrolled) {
             return <Widget>[
               SliverAppBar(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
                 pinned: true,
                 automaticallyImplyLeading: false,
                 backgroundColor: Colors.blue[900],
@@ -35,7 +38,6 @@ class _HomePageState extends State<HomePage> {
                   preferredSize: Size.fromHeight(2.0),
                   child: Container(
                     height: 2.0,
-                    // color: DataHolder.of(context).theme.homepageAppBarBottomBorder,
                   ),
                 ),
                 elevation: 20.0,
@@ -82,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                         Image.asset(
                           'assets/sm.jpg',
                           width: double.infinity,
-                          height: 200,
+                          height: MediaQuery.of(context).size.height * 0.3,
                           fit: BoxFit.cover,
                         ),
                         ListTile(
@@ -128,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                         Image.asset(
                           'assets/stocks.jpg',
                           width: double.infinity,
-                          height: 200,
+                          height: MediaQuery.of(context).size.height * 0.3,
                           fit: BoxFit.cover,
                         ),
                         ListTile(
@@ -174,7 +176,7 @@ class _HomePageState extends State<HomePage> {
                         Image.asset(
                           'assets/gov.jpg',
                           width: double.infinity,
-                          height: 200,
+                          height: MediaQuery.of(context).size.height * 0.3,
                           fit: BoxFit.cover,
                         ),
                         ListTile(

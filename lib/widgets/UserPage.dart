@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:myapp1/models/UserModel.dart';
+import '../models/UserModel.dart';
 
 class UserPage extends StatefulWidget {
   final UserModel user;
@@ -56,12 +56,6 @@ class _UserPageState extends State<UserPage> {
       ),
       body: ListView(
         children: [
-          // Container(
-          //   child: CircleAvatar(
-          //     radius: 100.0,
-          //     backgroundImage: NetworkImage(user.picture),
-          //   ),
-          // ),
           Stack(
             alignment: AlignmentDirectional.bottomCenter,
             children: [
@@ -72,15 +66,16 @@ class _UserPageState extends State<UserPage> {
                     bottomRight: Radius.circular(20.0),
                   ),
                 ),
-                width: double.infinity,
+                // width: double.infinity,
                 child: Image.network(
                   user.picture,
+                  width: double.infinity,
                   fit: BoxFit.fill,
                 ),
               ),
               Positioned(
                 child: SizedBox(
-                  height: 100.0,
+                  height: MediaQuery.of(context).size.height * 0.12,
                   child: Opacity(
                     opacity: 0.8,
                     child: Container(
@@ -99,7 +94,7 @@ class _UserPageState extends State<UserPage> {
                 ),
               ),
               Positioned(
-                bottom: 30.0,
+                bottom: MediaQuery.of(context).size.height * 0.0375,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Center(
@@ -115,7 +110,7 @@ class _UserPageState extends State<UserPage> {
                 ),
               ),
               Positioned(
-                bottom: 5,
+                bottom: MediaQuery.of(context).size.height * 0.007,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Center(
@@ -132,7 +127,6 @@ class _UserPageState extends State<UserPage> {
               ),
             ],
           ),
-
           ListTile(
             leading: Icon(
               FontAwesomeIcons.phone,

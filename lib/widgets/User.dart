@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:myapp1/models/UserModel.dart';
+import '../models/UserModel.dart';
 // import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp1/widgets/UserPage.dart';
+import 'UserPage.dart';
 import 'package:page_transition/page_transition.dart';
 
 class User extends StatefulWidget {

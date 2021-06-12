@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp1/models/GovModel.dart';
+import '../models/GovModel.dart';
 
 class InstitutionPage extends StatefulWidget {
   final GovModel govModel;
@@ -56,7 +56,7 @@ class _InstitutionPageState extends State<InstitutionPage> {
                   govModel.areaName,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 30.0,
+                    fontSize: MediaQuery.of(context).size.height * 0.04,
                     color: Colors.black,
                   ),
                 ),
@@ -73,6 +73,12 @@ class _InstitutionPageState extends State<InstitutionPage> {
                     color: Colors.black,
                   ),
                 ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(12.0, 0.0, 12.0, 8.0),
+              child: Divider(
+                color: Colors.black,
               ),
             ),
             Padding(

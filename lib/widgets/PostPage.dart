@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:myapp1/models/PostModel.dart';
+import '../models/PostModel.dart';
 import 'package:http/http.dart' as http;
 
 class PostPage extends StatefulWidget {
@@ -45,7 +45,7 @@ class _PostPageState extends State<PostPage> {
     post.ownerFName = d['owner']['firstName'];
     post.ownerLName = d['owner']['lastName'];
     post.publishDate = DateTime.parse(d['publishDate']);
-    // 
+    //
     setState(() {
       isUserLoaded = true;
     });
@@ -159,10 +159,13 @@ class _PostPageState extends State<PostPage> {
                                       child: Padding(
                                         padding: const EdgeInsets.all(4.0),
                                         child: Text(
-                                          ' $e\t\t',
+                                          ' #$e\t\t',
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 16.0,
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.0175,
                                           ),
                                         ),
                                       ),
@@ -210,10 +213,10 @@ class _PostPageState extends State<PostPage> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.fromLTRB(12.0, 0.0, 12.0, 0.0),
                     child: Container(
                       child: Text(
-                        '${post.ownerFName.toString().toLowerCase()}.${post.ownerLName.toString().toLowerCase()}:  ${post.text.toString().toLowerCase()}',
+                        '${post.ownerFName.toString().toLowerCase()}.${post.ownerLName.toString().toLowerCase()}: ${post.text.toString().toLowerCase()}',
                         softWrap: true,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -222,13 +225,13 @@ class _PostPageState extends State<PostPage> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
+                    padding: const EdgeInsets.fromLTRB(12.0, 0.0, 12.0, 0.0),
                     child: Container(
                       child: Text(
                         '${post.publishDate.day} ${months[post.publishDate.month - 1]}, ${post.publishDate.year}',
                         softWrap: true,
                         style: TextStyle(
-                          fontSize: 12,
+                          fontSize: MediaQuery.of(context).size.height * 0.0115,
                         ),
                       ),
                     ),

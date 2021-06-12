@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp1/GlobalVars.dart';
-import 'package:myapp1/HomePage.dart';
+import 'HomePage.dart';
 
 void main() {
   runApp(MyApp());

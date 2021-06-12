@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:myapp1/models/GovModel.dart';
-import 'package:myapp1/widgets/InstitutionPage.dart';
+import '../models/GovModel.dart';
+import 'InstitutionPage.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:http/http.dart' as http;
 
@@ -20,10 +20,8 @@ class _InstitutionState extends State<Institution> {
 
   List<GovModel> tempgovsModel = [];
   fetchGovs() async {
-    // var queryParameters = {'apikey': 'utyqe54xqnb7v5gju7x1'};
     var uri = Uri.parse(
         "https://dummy-wireframe.iecsemanipal.com/institutions?apikey=utyqe54xqnb7v5gju7x1");
-    // uri.replace(queryParameters: queryParameters);
     var response = await http.get(uri);
     var responseData = json.decode(response.body);
     var data = responseData['data'];
@@ -74,7 +72,6 @@ class _InstitutionState extends State<Institution> {
                   preferredSize: Size.fromHeight(2.0),
                   child: Container(
                     height: 2.0,
-                    // color: DataHolder.of(context).theme.homepageAppBarBottomBorder,
                   ),
                 ),
                 elevation: 20.0,
@@ -103,7 +100,6 @@ class _InstitutionState extends State<Institution> {
                         decoration: InputDecoration(
                           hintText: 'Search',
                           hintStyle: TextStyle(color: Colors.white),
-                          // fillColor: DataHolder.of(context).theme.networkDrawerBg,
                           filled: true,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
@@ -116,7 +112,6 @@ class _InstitutionState extends State<Institution> {
                           setState(() {
                             tempgovsModel =
                                 relevantResultsGovs(value, govModel);
-                            // (tempuserModel);
                           });
                         },
                       ),

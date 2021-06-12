@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:myapp1/models/PostModel.dart';
+import '../models/PostModel.dart';
 // import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp1/widgets/PostPage.dart';
+import 'PostPage.dart';
 import 'package:page_transition/page_transition.dart';
 
 class Post extends StatefulWidget {
@@ -47,6 +47,7 @@ class _PostState extends State<Post> {
                 width: double.infinity,
                 height: 200,
                 fit: BoxFit.cover,
+                gaplessPlayback: false,
               ),
               ListTile(
                 title: Text(

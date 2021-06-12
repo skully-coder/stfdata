@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:myapp1/models/StockModel.dart';
+import '../models/StockModel.dart';
 import 'package:http/http.dart' as http;
 
 class StockPage extends StatefulWidget {
@@ -79,12 +79,10 @@ class _StockPageState extends State<StockPage> {
 
   bool isStockFetched = false;
   fetchStonks(stockId) async {
-    // var queryParameters = {'apikey': 'utyqe54xqnb7v5gju7x1'};
     var url =
         "https://dummy-wireframe.iecsemanipal.com/stock/$stockId?apikey=utyqe54xqnb7v5gju7x1";
-    // 
+
     var uri = Uri.parse(url);
-    // uri.replace(queryParameters: queryParameters);
 
     var response = await http.get(uri);
     var responseData = json.decode(response.body);
@@ -195,15 +193,21 @@ class _StockPageState extends State<StockPage> {
           ? ListView(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.fromLTRB(12.0, 0.0, 12.0, 12.0),
                   child: Text(
                     stockModel.name,
                     softWrap: true,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 26.0,
+                      fontSize: MediaQuery.of(context).size.height * 0.030,
                       color: Colors.black,
                     ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(12.0, 0.0, 12.0, 8.0),
+                  child: Divider(
+                    color: Colors.black,
                   ),
                 ),
                 Padding(

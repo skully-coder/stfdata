@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:myapp1/models/StockModel.dart';
+import '../models/StockModel.dart';
 import 'package:http/http.dart' as http;
-import 'package:myapp1/widgets/StockPage.dart';
+import 'StockPage.dart';
 import 'package:page_transition/page_transition.dart';
 
 class Stock extends StatefulWidget {
@@ -28,7 +28,7 @@ class _StockState extends State<Stock> {
     var response = await http.get(uri);
     var responseData = json.decode(response.body);
     var data = responseData['data'];
-    // 
+
     try {
       for (var d in data) {
         StockModel p = StockModel(
@@ -91,7 +91,7 @@ class _StockState extends State<Stock> {
           lastSplitDate: d["LastSplitDate"],
         );
         // p.display();
-        
+
         stockModel.add(p);
       }
       setState(() {
@@ -129,7 +129,6 @@ class _StockState extends State<Stock> {
                   preferredSize: Size.fromHeight(2.0),
                   child: Container(
                     height: 2.0,
-                    // color: DataHolder.of(context).theme.homepageAppBarBottomBorder,
                   ),
                 ),
                 elevation: 20.0,
@@ -158,7 +157,6 @@ class _StockState extends State<Stock> {
                         decoration: InputDecoration(
                           hintText: 'Search',
                           hintStyle: TextStyle(color: Colors.white),
-                          // fillColor: DataHolder.of(context).theme.networkDrawerBg,
                           filled: true,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
@@ -171,7 +169,6 @@ class _StockState extends State<Stock> {
                           setState(() {
                             tempstockModel =
                                 relevantResultsStocks(value, stockModel);
-                            // 
                           });
                         },
                       ),
